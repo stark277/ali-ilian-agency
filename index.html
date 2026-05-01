@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ali Ilian Agency | Farmers Insurance – Chico, CA</title>
+  <meta name="description" content="Ali Ilian Agency – Your trusted Farmers Insurance agent in Chico, CA. Auto, home, life, and business insurance. Protecting what matters. Building what's next." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #1B2E5E;
+      --navy2:  #15254e;
+      --gold:   #B8963A;
+      --gold2:  #d4ab4a;
+      --white:  #ffffff;
+      --off:    #F7F8FC;
+      --gray:   #6B7280;
+      --dark:   #111827;
+      --border: #E5E7EB;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(27,46,94,.10);
+      --shadow-lg: 0 12px 48px rgba(27,46,94,.16);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--white); line-height: 1.6; overflow-x: hidden; }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.25; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ─── Nav ───────────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(27,46,94,.97);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      transition: box-shadow .3s;
+    }
+    #nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.25); }
+    .nav-logo { display: flex; align-items: center; gap: 14px; }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text span:first-child { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--white); letter-spacing: .04em; }
+    .nav-logo-text span:last-child  { font-size: .65rem; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: rgba(255,255,255,.85); font-size: .9rem; font-weight: 500; letter-spacing: .02em; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold); color: var(--white) !important;
+      padding: 10px 22px; border-radius: 6px; font-weight: 600 !important;
+      transition: background .2s, transform .15s !important;
+    }
+    .nav-cta:hover { background: var(--gold2) !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 26px; height: 2px; background: white; transition: .3s; border-radius: 2px; }
+    .mobile-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 999;
+      background: var(--navy2); padding: 20px 5% 28px;
+      flex-direction: column; gap: 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,.85); padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.08); font-weight: 500; }
+    .mobile-menu a:last-child { border-bottom: none; margin-top: 8px; text-align: center; background: var(--gold); color: white; padding: 13px; border-radius: 6px; }
+
+    /* ─── Hero ──────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, #243a73 50%, #1a3060 100%);
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0; opacity: .04;
+      background-image: repeating-linear-gradient(45deg, var(--white) 0, var(--white) 1px, transparent 0, transparent 50%);
+      background-size: 30px 30px;
+    }
+    .hero-glow {
+      position: absolute; width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(184,150,58,.18) 0%, transparent 70%);
+      right: -100px; top: 50%; transform: translateY(-50%);
+      pointer-events: none;
+    }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,150,58,.15); border: 1px solid rgba(184,150,58,.35); color: var(--gold); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; padding: 6px 14px; border-radius: 20px; margin-bottom: 22px; font-weight: 600; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .hero-title { font-size: clamp(2.2rem, 4vw, 3.4rem); color: var(--white); margin-bottom: 10px; }
+    .hero-title em { color: var(--gold); font-style: normal; }
+    .hero-sub { font-size: clamp(.95rem, 1.4vw, 1.1rem); color: rgba(255,255,255,.7); margin-bottom: 36px; max-width: 480px; font-weight: 300; line-height: 1.7; }
+    .hero-tagline { font-family: 'Playfair Display', serif; font-size: 1rem; color: rgba(255,255,255,.5); letter-spacing: .08em; margin-bottom: 36px; font-style: italic; }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--gold); color: var(--white); padding: 15px 32px; border-radius: 8px; font-weight: 600; font-size: .95rem; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 4px 18px rgba(184,150,58,.4); }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(184,150,58,.5); }
+    .btn-outline { background: transparent; color: var(--white); padding: 15px 32px; border-radius: 8px; font-weight: 600; font-size: .95rem; border: 2px solid rgba(255,255,255,.35); transition: border-color .2s, background .2s, transform .15s; }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.06); transform: translateY(-2px); }
+    .hero-stats { display: flex; gap: 36px; margin-top: 48px; }
+    .hero-stat .num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); }
+    .hero-stat .lbl { font-size: .75rem; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .1em; margin-top: 2px; }
+    .hero-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px; padding: 36px;
+      backdrop-filter: blur(10px);
+    }
+    .hero-card h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.3rem; margin-bottom: 6px; }
+    .hero-card p { color: rgba(255,255,255,.55); font-size: .85rem; margin-bottom: 28px; }
+    .quote-form { display: flex; flex-direction: column; gap: 14px; }
+    .quote-form input, .quote-form select {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      color: white; padding: 12px 16px; border-radius: 8px; font-size: .9rem; font-family: inherit;
+      transition: border-color .2s, background .2s;
+      width: 100%;
+    }
+    .quote-form input::placeholder { color: rgba(255,255,255,.4); }
+    .quote-form input:focus, .quote-form select:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,.12); }
+    .quote-form select option { background: var(--navy); }
+    .quote-form .btn-primary { border: none; cursor: pointer; font-family: inherit; }
+
+    /* ─── Section Wrapper ──────────────────────────────────────── */
+    section { padding: 100px 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: .75rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 12px; }
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--navy); margin-bottom: 18px; }
+    .section-sub { font-size: 1.05rem; color: var(--gray); max-width: 560px; line-height: 1.7; }
+    .section-header { margin-bottom: 60px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+    .divider { width: 52px; height: 3px; background: var(--gold); border-radius: 2px; margin: 18px 0 0; }
+    .divider.center { margin: 18px auto 0; }
+
+    /* ─── Services ──────────────────────────────────────────────── */
+    #services { background: var(--off); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .service-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 36px 30px; box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative; overflow: hidden;
+    }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: rgba(184,150,58,.2); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon { width: 58px; height: 58px; background: linear-gradient(135deg, rgba(27,46,94,.08), rgba(27,46,94,.04)); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; font-size: 1.8rem; }
+    .service-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 10px; }
+    .service-card p { font-size: .88rem; color: var(--gray); line-height: 1.65; margin-bottom: 20px; }
+    .service-link { font-size: .85rem; color: var(--gold); font-weight: 600; display: inline-flex; align-items: center; gap: 6px; transition: gap .2s; }
+    .service-link:hover { gap: 10px; }
+
+    /* ─── About ─────────────────────────────────────────────────── */
+    #about .section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-img-wrap { position: relative; }
+    .about-img-wrap .img-placeholder {
+      width: 100%; aspect-ratio: 4/5; border-radius: 20px;
+      background: linear-gradient(135deg, var(--navy) 0%, #243a73 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.2); font-size: 5rem;
+    }
+    .about-badge-card {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--white); border-radius: var(--radius);
+      padding: 20px 24px; box-shadow: var(--shadow-lg);
+      display: flex; align-items: center; gap: 14px;
+      border: 1px solid var(--border);
+    }
+    .about-badge-card .icon { width: 46px; height: 46px; background: var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .about-badge-card .text span:first-child { display: block; font-weight: 700; color: var(--navy); font-size: 1.4rem; font-family: 'Playfair Display', serif; }
+    .about-badge-card .text span:last-child { font-size: .78rem; color: var(--gray); }
+    .about-text .section-sub { max-width: 100%; margin-bottom: 28px; }
+    .about-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .about-list li { display: flex; align-items: flex-start; gap: 12px; font-size: .9rem; color: var(--gray); }
+    .about-list li::before { content: ''; width: 20px; height: 20px; border-radius: 50%; background: rgba(184,150,58,.12); border: 2px solid var(--gold); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+    .check-item::before { content: '✓' !important; width: 20px !important; height: 20px !important; background: var(--gold) !important; color: white; font-size: .65rem; font-weight: 700; display: flex !important; align-items: center; justify-content: center; border: none !important; }
+
+    /* ─── Why Us ─────────────────────────────────────────────────── */
+    #why { background: linear-gradient(135deg, var(--navy) 0%, #1e3575 100%); }
+    #why .section-title, #why .section-label { color: var(--white); }
+    #why .section-sub { color: rgba(255,255,255,.65); }
+    #why .divider { background: var(--gold); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .why-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 32px 24px; transition: background .25s, transform .25s; }
+    .why-card:hover { background: rgba(255,255,255,.1); transform: translateY(-4px); }
+    .why-num { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+    .why-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 10px; }
+    .why-card p { color: rgba(255,255,255,.55); font-size: .85rem; line-height: 1.6; }
+
+    /* ─── Testimonials ───────────────────────────────────────────── */
+    #testimonials { background: var(--off); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .review-card { background: var(--white); border-radius: var(--radius); padding: 32px 28px; box-shadow: var(--shadow); border: 1px solid var(--border); transition: transform .2s, box-shadow .2s; }
+    .review-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .stars { color: #F59E0B; font-size: 1rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .review-text { font-size: .9rem; color: var(--gray); line-height: 1.7; margin-bottom: 22px; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .reviewer-avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), #243a73); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .reviewer-info span:first-child { display: block; font-weight: 600; color: var(--dark); font-size: .9rem; }
+    .reviewer-info span:last-child { font-size: .78rem; color: var(--gray); }
+
+    /* ─── Products Banner ─────────────────────────────────────────── */
+    #products {
+      background: var(--navy);
+      padding: 70px 5%;
+    }
+    .products-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .products-text h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: white; margin-bottom: 8px; }
+    .products-text p { color: rgba(255,255,255,.6); font-size: .95rem; }
+    .products-logos { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .product-chip { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.8); padding: 10px 20px; border-radius: 30px; font-size: .82rem; font-weight: 500; white-space: nowrap; transition: background .2s, color .2s; cursor: default; }
+    .product-chip:hover { background: var(--gold); color: white; border-color: var(--gold); }
+
+    /* ─── Contact ────────────────────────────────────────────────── */
+    #contact .section-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; margin-top: 8px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-icon { width: 48px; height: 48px; background: rgba(184,150,58,.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; color: var(--gold); }
+    .contact-item h4 { font-size: .85rem; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+    .contact-item p, .contact-item a { font-size: .92rem; color: var(--gray); line-height: 1.5; }
+    .contact-item a:hover { color: var(--gold); }
+    .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; }
+    .hours-row { display: flex; justify-content: space-between; font-size: .85rem; color: var(--gray); padding: 4px 0; border-bottom: 1px solid var(--border); }
+    .hours-row span:last-child { font-weight: 500; color: var(--dark); }
+    .contact-form-wrap { background: var(--white); border-radius: 20px; padding: 40px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); }
+    .contact-form-wrap h3 { font-size: 1.4rem; color: var(--navy); margin-bottom: 6px; }
+    .contact-form-wrap > p { color: var(--gray); font-size: .88rem; margin-bottom: 28px; }
+    .cf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cf-full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: .8rem; font-weight: 600; color: var(--navy); letter-spacing: .04em; text-transform: uppercase; }
+    .form-group input, .form-group select, .form-group textarea {
+      border: 1.5px solid var(--border); border-radius: 8px; padding: 12px 14px;
+      font-size: .9rem; font-family: inherit; color: var(--dark); background: var(--off);
+      transition: border-color .2s, background .2s; resize: vertical;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--gold); background: white;
+    }
+    .form-group textarea { min-height: 100px; }
+    .cf-submit { background: var(--navy); color: white; border: none; padding: 15px; border-radius: 8px; font-size: .95rem; font-weight: 600; font-family: inherit; cursor: pointer; width: 100%; margin-top: 8px; transition: background .2s, transform .15s; }
+    .cf-submit:hover { background: var(--gold); transform: translateY(-1px); }
+    .form-note { font-size: .75rem; color: var(--gray); text-align: center; margin-top: 10px; }
+
+    /* ─── Map Strip ─────────────────────────────────────────────── */
+    #map-strip { padding: 0; }
+    #map-strip iframe { width: 100%; height: 420px; border: none; display: block; }
+
+    /* ─── Footer ────────────────────────────────────────────────── */
+    footer {
+      background: #0E1B3D;
+      color: rgba(255,255,255,.7);
+      padding: 72px 5% 32px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-brand img { height: 52px; width: auto; }
+    .footer-brand p { font-size: .85rem; line-height: 1.7; color: rgba(255,255,255,.5); max-width: 280px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 4px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: background .2s; }
+    .social-btn:hover { background: var(--gold); }
+    .footer-col h4 { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .85rem; color: rgba(255,255,255,.55); transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
+    .footer-bottom a { color: rgba(255,255,255,.45); font-size: .8rem; transition: color .2s; }
+    .footer-bottom a:hover { color: var(--gold); }
+    .footer-farmers { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: rgba(255,255,255,.3); }
+
+    /* ─── Scroll Reveal ─────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── Responsive ────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 72px 5%; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-stats { gap: 24px; }
+      #about .section-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-badge-card { right: 0; bottom: -16px; }
+      #contact .section-inner { grid-template-columns: 1fr; gap: 48px; }
+      .cf-grid { grid-template-columns: 1fr; }
+      .cf-full { grid-column: 1; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 560px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+      .hero-btns a, .hero-btns button { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">
+      <img src="logo.png" alt="Ali Ilian Agency Logo" onerror="this.style.display='none'" />
+      <div class="nav-logo-text">
+        <span>Ali Ilian Agency</span>
+        <span>Farmers Insurance</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Insurance</a>
+      <a href="#about">About</a>
+      <a href="#why">Why Us</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="toggleMenu()">Insurance</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#why" onclick="toggleMenu()">Why Us</a>
+    <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+    <a href="#contact" onclick="toggleMenu()">Get a Free Quote</a>
+  </div>
+
+  <!-- ─── Hero ────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">Farmers Insurance – Chico, CA</div>
+        <h1 class="hero-title">
+          Protecting What <em>Matters</em>.<br />Building What's <em>Next</em>.
+        </h1>
+        <p class="hero-sub">
+          Your trusted local Farmers Insurance agent in Chico. From your first home to your growing business — we tailor coverage that fits your life.
+        </p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-primary">Get a Free Quote</a>
+          <a href="tel:+15305551234" class="btn-outline">📞 Call Our Office</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num">15+</div>
+            <div class="lbl">Years Experience</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">500+</div>
+            <div class="lbl">Families Protected</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">5★</div>
+            <div class="lbl">Client Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3>Start Your Quote</h3>
+        <p>Takes less than 2 minutes</p>
+        <form class="quote-form" onsubmit="handleQuote(event)">
+          <input type="text" placeholder="Your Full Name" required />
+          <input type="tel" placeholder="Phone Number" required />
+          <input type="email" placeholder="Email Address" required />
+          <select required>
+            <option value="" disabled selected>Insurance Type</option>
+            <option>Auto Insurance</option>
+            <option>Home Insurance</option>
+            <option>Life Insurance</option>
+            <option>Business Insurance</option>
+            <option>Renters Insurance</option>
+            <option>Umbrella Insurance</option>
+            <option>Multiple Policies</option>
+          </select>
+          <button type="submit" class="btn-primary">Request My Quote →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Services ────────────────────────────────────────────── -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-header center reveal">
+        <div class="section-label">What We Offer</div>
+        <h2 class="section-title">Coverage for Every Chapter of Life</h2>
+        <p class="section-sub">From the car you drive to the business you've built — we have a policy that fits your world.</p>
+        <div class="divider center"></div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">🚗</div>
+          <h3>Auto Insurance</h3>
+          <p>Comprehensive coverage for your vehicle with competitive rates and flexible deductibles. Drive with confidence knowing you're fully protected on every road.</p>
+          <a href="#contact" class="service-link">Get Auto Quote →</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🏠</div>
+          <h3>Home Insurance</h3>
+          <p>Protect your most valuable asset. We cover your home, belongings, and liability so you can enjoy the place you call home without worry.</p>
+          <a href="#contact" class="service-link">Get Home Quote →</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">❤️</div>
+          <h3>Life Insurance</h3>
+          <p>Secure your family's financial future. Term, whole life, and universal options — we help you choose the right coverage for your stage of life.</p>
+          <a href="#contact" class="service-link">Explore Life Plans →</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">💼</div>
+          <h3>Business Insurance</h3>
+          <p>From small businesses to established enterprises — protect your livelihood with commercial property, liability, and workers' comp coverage.</p>
+          <a href="#contact" class="service-link">Protect My Business →</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">🏢</div>
+          <h3>Renters Insurance</h3>
+          <p>Affordable protection for your apartment or rental home. Cover your personal property and protect yourself from unexpected liability claims.</p>
+          <a href="#contact" class="service-link">Get Renters Quote →</a>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">☂️</div>
+          <h3>Umbrella Insurance</h3>
+          <p>An extra layer of liability protection beyond your existing policies. Perfect for families and individuals who want comprehensive peace of mind.</p>
+          <a href="#contact" class="service-link">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Products Banner ──────────────────────────────────────── -->
+  <div id="products">
+    <div class="products-inner">
+      <div class="products-text">
+        <h2>Backed by Farmers Insurance</h2>
+        <p>Over 90 years of protecting American families and businesses</p>
+      </div>
+      <div class="products-logos">
+        <div class="product-chip">Auto</div>
+        <div class="product-chip">Home</div>
+        <div class="product-chip">Life</div>
+        <div class="product-chip">Business</div>
+        <div class="product-chip">Renters</div>
+        <div class="product-chip">Umbrella</div>
+        <div class="product-chip">Motorcycle</div>
+        <div class="product-chip">Boat</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── About ────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-img-wrap reveal">
+        <div class="img-placeholder">
+          <span>👤</span>
+        </div>
+        <div class="about-badge-card">
+          <div class="icon">🏆</div>
+          <div class="text">
+            <span>Top Agent</span>
+            <span>Farmers District Award</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-label">About Ali Ilian</div>
+        <h2 class="section-title">A Local Agent Who Truly Cares</h2>
+        <div class="divider"></div>
+        <br/>
+        <p class="section-sub">
+          Ali Ilian has been serving the Chico, CA community as a Farmers Insurance agent, building lasting relationships based on trust, transparency, and genuine care for every client's well-being.
+        </p>
+        <br/>
+        <p style="font-size:.9rem;color:var(--gray);line-height:1.75;margin-bottom:24px;">
+          As a proud member of the Chico community, Ali understands the unique needs of Northern California families and businesses. Whether you're buying your first home, starting a family, or growing your company — Ali provides personalized guidance every step of the way.
+        </p>
+        <ul class="about-list">
+          <li class="check-item">Licensed Farmers Insurance Agent in California</li>
+          <li class="check-item">Specializes in personalized, local service</li>
+          <li class="check-item">Committed to fast claims support and advocacy</li>
+          <li class="check-item">Spanish-speaking services available</li>
+          <li class="check-item">Free policy reviews – no obligation</li>
+        </ul>
+        <a href="#contact" class="btn-primary" style="display:inline-block;">Schedule a Free Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Why Us ──────────────────────────────────────────────── -->
+  <section id="why">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-label">Why Ali Ilian Agency</div>
+        <h2 class="section-title" style="color:white;">The Local Difference</h2>
+        <p class="section-sub">We're not a call center. We're your neighbors — and we treat you like it.</p>
+        <div class="divider"></div>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-num">01</div>
+          <h4>Personal Attention</h4>
+          <p>Every client gets direct access to Ali and our team — not a 1-800 number. We know your name and your story.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">02</div>
+          <h4>Local Expertise</h4>
+          <p>We understand Northern California risks — from wildfires to floods. We build your policy around your real environment.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">03</div>
+          <h4>Claims Advocacy</h4>
+          <p>When you have a claim, we go to bat for you. We guide you through the process and fight for fair resolution.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">04</div>
+          <h4>Multi-Policy Savings</h4>
+          <p>Bundle auto, home, and life insurance to maximize discounts and simplify your coverage under one trusted agent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Testimonials ─────────────────────────────────────────── -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="section-header center reveal">
+        <div class="section-label">Client Reviews</div>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <p class="section-sub">Real feedback from the Chico families and businesses we protect every day.</p>
+        <div class="divider center"></div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Ali made switching our home and auto so easy. He explained everything clearly, found us better coverage at a lower price, and has been incredibly responsive ever since."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">JM</div>
+            <div class="reviewer-info">
+              <span>Jennifer M.</span>
+              <span>Chico, CA – Home & Auto</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"When we had a water damage claim, Ali walked us through every step. He was our advocate and made sure everything was handled quickly and fairly. Truly exceptional service."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">RT</div>
+            <div class="reviewer-info">
+              <span>Robert T.</span>
+              <span>Chico, CA – Home Insurance</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"Best insurance agent I've ever had. Ali takes the time to actually understand your needs — not just sell you a policy. Our whole family is now with the Ali Ilian Agency."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">SL</div>
+            <div class="reviewer-info">
+              <span>Sarah L.</span>
+              <span>Chico, CA – Auto & Life</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact ──────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="reveal">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Let's Talk About Your Coverage</h2>
+        <div class="divider"></div>
+        <br/>
+        <p class="section-sub" style="max-width:100%;margin-bottom:36px;">
+          Ready for a free, no-obligation quote? Have questions about your existing policy? We'd love to hear from you.
+        </p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Office Location</h4>
+              <p>Chico, CA 95928</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <a href="tel:+15305551234">(530) 555-1234</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <a href="mailto:ailian@farmersagent.com">ailian@farmersagent.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>Office Hours</h4>
+              <div class="hours-grid">
+                <div class="hours-row"><span>Mon – Fri</span><span>9:00 AM – 5:30 PM</span></div>
+                <div class="hours-row"><span>Saturday</span><span>10:00 AM – 2:00 PM</span></div>
+                <div class="hours-row"><span>Sunday</span><span>By Appointment</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrap reveal">
+        <h3>Request a Free Quote</h3>
+        <p>Fill out the form and we'll get back to you within one business day.</p>
+        <form class="cf-grid" onsubmit="handleContact(event)">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" required />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" required />
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(530) 000-0000" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="you@email.com" required />
+          </div>
+          <div class="form-group cf-full">
+            <label>Insurance Type</label>
+            <select required>
+              <option value="" disabled selected>Select coverage type…</option>
+              <option>Auto Insurance</option>
+              <option>Home Insurance</option>
+              <option>Life Insurance</option>
+              <option>Business Insurance</option>
+              <option>Renters Insurance</option>
+              <option>Umbrella Insurance</option>
+              <option>Multiple / Bundle</option>
+            </select>
+          </div>
+          <div class="form-group cf-full">
+            <label>Message (optional)</label>
+            <textarea placeholder="Tell us a little about what you're looking for…"></textarea>
+          </div>
+          <div class="cf-full">
+            <button type="submit" class="cf-submit">Send My Request →</button>
+            <p class="form-note">🔒 Your information is private and never shared with third parties.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Map ─────────────────────────────────────────────────── -->
+  <div id="map-strip">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d98688.18!2d-121.8847!3d39.7285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80832a2f9b8b0b0f%3A0x1f7d3c5c8d8e4b4f!2sChico%2C%20CA!5e0!3m2!1sen!2sus!4v1699999999999"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Ali Ilian Agency – Chico, CA">
+    </iframe>
+  </div>
+
+  <!-- ─── Footer ───────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="logo.png" alt="Ali Ilian Agency" onerror="this.style.display='none'" />
+          <p>Protecting Chico families and businesses with personalized Farmers Insurance coverage since day one. Local expertise, genuine care.</p>
+          <div class="footer-social">
+            <a class="social-btn" href="#" aria-label="Facebook">f</a>
+            <a class="social-btn" href="#" aria-label="Instagram">in</a>
+            <a class="social-btn" href="#" aria-label="LinkedIn">li</a>
+            <a class="social-btn" href="#" aria-label="Yelp">Y</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Insurance</h4>
+          <ul>
+            <li><a href="#services">Auto Insurance</a></li>
+            <li><a href="#services">Home Insurance</a></li>
+            <li><a href="#services">Life Insurance</a></li>
+            <li><a href="#services">Business Insurance</a></li>
+            <li><a href="#services">Renters Insurance</a></li>
+            <li><a href="#services">Umbrella</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Agency</h4>
+          <ul>
+            <li><a href="#about">About Ali</a></li>
+            <li><a href="#why">Why Choose Us</a></li>
+            <li><a href="#testimonials">Client Reviews</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#contact">Free Quote</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+15305551234">(530) 555-1234</a></li>
+            <li><a href="mailto:ailian@farmersagent.com">ailian@farmersagent.com</a></li>
+            <li><a href="#contact">Chico, CA 95928</a></li>
+            <li><a href="#contact">Mon–Fri: 9am–5:30pm</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Ali Ilian Agency. All rights reserved.</p>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Accessibility</a>
+        </div>
+        <div class="footer-farmers">
+          <span>Authorized Farmers Insurance Agent</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── Scripts ──────────────────────────────────────────────── -->
+  <script>
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    document.addEventListener('click', e => {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.getElementById('hamburger');
+      if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+        menu.classList.remove('open');
+      }
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Hero quote form
+    function handleQuote(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = '✓ Request Sent! We\'ll be in touch.';
+      btn.style.background = '#16a34a';
+      btn.disabled = true;
+    }
+
+    // Contact form
+    function handleContact(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.cf-submit');
+      btn.textContent = '✓ Message Sent! We\'ll respond within 1 business day.';
+      btn.style.background = '#16a34a';
+      btn.disabled = true;
+    }
+
+    // Stagger service card animations
+    document.querySelectorAll('.service-card, .why-card, .review-card').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 3) * 0.1}s`;
+    });
+  </script>
+</body>
+</html>
